@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="text/javascript" src='https://d3js.org/d3.v5.min.js'></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <style> circle {fill: lightblue; stroke: black} </style>
+    <style>
+      body {font-family: Montserrat; max-width: 900px; margin: auto;}
+    </style>
+
+  </head>
+  <body onload='init()' onresize='init()'>
+    <h1>How do fluctuations in gas prices affect manufacturer car production?</h1>
+    <hr/>
+    <h3>Filter by range of years</h3>
+    <p>Choose start year and end year between 1976 and 2018</p>
+    <form action="#" style="float:left">
+      Start year: <input id="startyearinput" type="number" name="startYear" min="1976" max="2018"> |
+      End year: <input id="endyearinput" type="number" name="endYear" min="1976" max="2018">
+      <input type="submit"> &nbsp | &nbsp
+    </form>
+    <form action="#">
+      <input label="Reset" type="submit" value="RESET">
+    </form>
+    <svg class="gaspriceyoy" height=400 width=950></svg>
+    <svg class="truckcarsales" height=400 width=950></svg>
+    <script type="text/javascript" src="d3-scripts.js"></script>
+    <script>
+    async function init() {
+
+      var startYear = 1976;
+      var endYear = 2018;
+      var urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.has("startYear") && urlParams.has("endYear")) {
+        var startYearQuery = parseInt(urlParams.get("startYear"));
+        var endYearQuery = parseInt(urlParams.get("endYear"));
+        var inRange = function(year) {return year >= 1976 && year <= 2018}
+        if (inRange(startYearQuery) && inRange(endYearQuery) && startYearQuery <= endYearQuery) {
+          startYear = startYearQuery;
+          endYear = endYearQuery;
+        }
+      }
+      d3.select("#startyearinput").attr("value", startYear);
+      d3.select("#endyearinput").attr("value", endYear);
+      // clear SVGs
+      d3.select("svg.gaspriceyoy").html("");
+      d3.select("svg.truckcarsales").html("");
+      d3.selectAll("div.annotations").remove();
+
+
+      load_gaspriceyoy("svg.gaspriceyoy", 400, 950, startYear, endYear);
+      load_truckcarsales("svg.truckcarsales", 400, 950, startYear, endYear);
+    }
+
+    // sources:
+    // gas data: https://data.bls.gov/pdq/SurveyOutputServlet
+    // truck data: U.S. Bureau of Economic Analysis, Motor Vehicle Retail Sales: Light Weight Trucks [LTRUCKNSA], retrieved from FRED, Federal Reserve Bank of St. Louis; https://fred.stlouisfed.org/series/LTRUCKNSA, July 25, 2019.
+
+
+    </script>
+  </body>
+</html>

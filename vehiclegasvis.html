@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="text/javascript" src='https://d3js.org/d3.v5.min.js'></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <style> circle {fill: lightblue; stroke: black} </style>
+    <style>body {font-family: Montserrat;}</style>
+
+  </head>
+  <body onload='init()'>
+    <h1>How do fluctuations in gas prices affect manufacturer car production?</h1>
+    <svg class="gaspriceyoy" width=600 height=300></svg>
+    <svg class="truckcarsales" width=600 height=300></svg>
+    <svg class="mpgyoy" width=600 height=300></svg>
+    <script>
+    async function init() {
+      var margin = 50;
+      var height = 200;
+      var width = 600;
+
+      var yearRange = [1970, 2021];
+      var xScale = d3.scaleLinear().domain(yearRange).range([0,width]);
+
+      // Gas Price Year over Year
+      var gasRange = [0, 4.4];
+      const gasdata = await d3.csv('./processed_csvs/gasoline-price-history.csv');
+      var yScaleGas = d3.scaleLinear().domain(gasRange).range([height,0]);
+
+      d3.select('svg.gaspriceyoy')
+        .append('g')
+        .attr("transform","translate("+margin+","+margin+")")
+        .selectAll('circle')
+        .data(gasdata)
+        .enter().append('circle')
+        .attr('cx', function(d){return xScale(parseInt(d.Year))})
+        .attr('cy', function(d){return yScaleGas(parseFloat(d.Avg))})
+        .attr('r', function(d,i) {return 2});
+
+       // add axes
+      d3.select("svg.gaspriceyoy").append("g")
+        .attr("transform", "translate(" + margin + "," + margin + ")")
+        .call(d3.axisLeft(yScaleGas)
+        // .tickValues([10,20,50,100])
+        .tickFormat(d3.format("$")));
+
+      d3.select("svg.gaspriceyoy").append("g")
+        .attr("transform", "translate(" + margin + "," + (margin + height) + ")")
+        .call(d3.axisBottom(xScale)
+        // .tickValues([10,20,50,100])
+        .tickFormat(d3.format("")));
+
+      // // Truck + Car Sales Year over Year
+      // var saleRange = [0,20000]
+      // const truckcarsalesdata = await d3.csv("./processed_csvs/gasoline-price-history.csv");
+      //
+      // d3.select('svg.truckcarsales')
+      //   .append('g')
+      //   .attr("transform","translate("+margin+","+margin+")")
+      //   .selectAll('circle')
+      //   .data(truckcarsalesdata)
+      //   .enter().append('circle')
+      //   .attr('cx', function(d){
+      //     return xScale(parseInt(d["DATE"].split("-")[0]))
+      //   })
+      //   .attr('cy', function(d){
+      //     return yScaleGas(parseFloat(d.Avg))
+      //   })
+      //   .attr('r', function(d,i) {return 2});
+
+
+      // MPG Year over Year
+      const mpgdata = await d3.csv('./processed_csvs/vehicle-prod-data.csv');
+      mpgRange = [0,30];
+      var yScaleMPG = d3.scaleLinear().domain(mpgRange).range([height,0]);
+
+      d3.select('svg.mpgyoy')
+        .append('g')
+        .attr("transform","translate("+margin+","+margin+")")
+        .selectAll('circle')
+        .data(mpgdata)
+        .enter().append('circle')
+        .attr('cx', function(d){return xScale(parseInt(d["Model Year"])); })
+        .attr('cy', function(d){return yScaleMPG(parseFloat(d["Real-World FE (mpg)"]))})
+        .attr('r', function(d,i) {return 2});
+
+       // add axes
+      d3.select("svg.mpgyoy").append("g")
+        .attr("transform", "translate(" + margin + "," + margin + ")")
+        .call(d3.axisLeft(yScaleMPG)
+        // .tickValues([10,20,50,100])
+        .tickFormat(d3.format("")));
+
+      d3.select("svg.mpgyoy").append("g")
+        .attr("transform", "translate(" + margin + "," + (margin + height) + ")")
+        .call(d3.axisBottom(xScale)
+        // .tickValues([10,20,50,100])
+        .tickFormat(d3.format("")));
+
+    }
+
+    </script>
+  </body>
+</html>
