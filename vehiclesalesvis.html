@@ -3,34 +3,96 @@
   <head>
     <script type="text/javascript" src='https://d3js.org/d3.v5.min.js'></script>
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <style> circle {fill: lightblue; stroke: black} </style>
     <style>
-      body {font-family: Montserrat; max-width: 900px; margin: auto;}
+      body {font-family: Montserrat; max-width: 1000px; margin: auto;}
+
     </style>
 
   </head>
   <body onload='init()' onresize='init()'>
     <h1>How do fluctuations in gas prices affect manufacturer car production?</h1>
     <hr/>
-    <h3>Filter by range of years</h3>
-    <p>Choose start year and end year between 1976 and 2018</p>
+    <div class="row">
+      <div class="col-5">
+        <h4>Scene <span class="sceneNum"></span></h4>
+        <h5>Auto <b>Sales</b> and Gas Pricing YoY
+          from <span class="sceneStartYear"></span> to <span class="sceneEndYear"></span>
+        </h5>
+        <nav aria-label="...">
+          <ul class="pagination">
+            <li id="s1" class="page-item"><a class="page-link" href="vehiclesalesvis.html?scene=1">1</a></li>
+            <li id="s2" class="page-item"><a class="page-link" href="vehiclesalesvis.html?scene=2">2</a</li>
+            <li id="s3" class="page-item"><a class="page-link" href="vehiclesalesvis.html?scene=3">3</a></li>
+            <li id="s4" class="page-item"><a class="page-link" href="vehiclesalesvis.html?scene=4">4</a></li>
+            <li id="s5" class="page-item"><a class="page-link" href="vehiclesalesvis.html?scene=5">5</a></li>
+            <li id="s6" class="page-item"><a class="page-link" href="vehicleprodvis.html">6</a></li>
+            <li id="s7" class="page-item"><a class="page-link" href="vehicleclimatevis.html">7</a></li>
+          </ul>
+        </nav>
+        <hr/>
+      </div>
+      <div id="sceneNotes" class="col-7"></div>
+    </div>
+    <hr/>
+    <p><b>Filter by range of years: </b>Choose start year and end year between 1976 and 2018</p>
     <form action="#" style="float:left">
       Start year: <input id="startyearinput" type="number" name="startYear" min="1976" max="2018"> |
       End year: <input id="endyearinput" type="number" name="endYear" min="1976" max="2018">
       <input type="submit"> &nbsp | &nbsp
     </form>
     <form action="#">
-      <input label="Reset" type="submit" value="RESET">
+      <input label="Reset" type="submit" value="RESET"> <i>(returns to overview scene 1)</i>
     </form>
     <svg class="gaspriceyoy" height=400 width=950></svg>
     <svg class="truckcarsales" height=400 width=950></svg>
     <script type="text/javascript" src="d3-scripts.js"></script>
     <script>
-    async function init() {
 
+    async function init() {
+      // Get the current startYear and endYear and scene
       var startYear = 1976;
       var endYear = 2018;
+      var scene = 1;
       var urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.has("scene")) {
+        scene = parseInt(urlParams.get("scene"));
+      }
+      if (scene == 1) {
+        const sceneNote = "<h5>Key Insights from the data:</h5>"+
+      '<h6>Scene 1, the Overview</h6>'+
+          '<ul><li>Here, we present an overview of the history of oil prices, and car sales</li>' +
+          '<li>Future scenes will focus and remark on specific period in vehicle sales and oil history</li>'  +
+          '<li>1981: lol</li>' +
+          '<li>1978: hello</li>' +
+          '<li>1981: lol</li>' +
+          '<li>1978: hello</li>' +
+          '<li>1981: lol</li></ul>';
+        d3.select("#s1").classed("active", true);
+        d3.select("#sceneNotes").html(sceneNote);
+      } else if (scene == 2) {
+        startYear = 1976;
+        endYear = 1981;
+        d3.select("#s2").classed("active", true);
+      } else if (scene == 3) {
+        startYear = 1981;
+        endYear = 2002;
+        d3.select("#s3").classed("active", true);
+      } else if (scene == 4) {
+        startYear = 2002;
+        endYear = 2008;
+        d3.select("#s4").classed("active", true);
+      } else if (scene == 5) {
+        startYear = 2008;
+        endYear = 2018;
+        d3.select("#s5").classed("active", true);
+      }
+      d3.select("span.sceneNum").html(scene);
+      d3.select("span.sceneStartYear").html(startYear);
+      d3.select("span.sceneEndYear").html(endYear);
+
+
       if (urlParams.has("startYear") && urlParams.has("endYear")) {
         var startYearQuery = parseInt(urlParams.get("startYear"));
         var endYearQuery = parseInt(urlParams.get("endYear"));
@@ -55,6 +117,8 @@
     // sources:
     // gas data: https://data.bls.gov/pdq/SurveyOutputServlet
     // truck data: U.S. Bureau of Economic Analysis, Motor Vehicle Retail Sales: Light Weight Trucks [LTRUCKNSA], retrieved from FRED, Federal Reserve Bank of St. Louis; https://fred.stlouisfed.org/series/LTRUCKNSA, July 25, 2019.
+    // light weight vehile data URL: https://fred.stlouisfed.org/search/?st=light%20weight%20vehicles
+    // CPI: https://www.minneapolisfed.org/community/financial-and-economic-education/cpi-calculator-information/consumer-price-index-and-inflation-rates-1913
 
 
     </script>
