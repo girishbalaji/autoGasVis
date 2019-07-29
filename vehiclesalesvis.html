@@ -6,53 +6,58 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <style> circle {fill: lightblue; stroke: black} </style>
     <style>
-      body {padding: 20px; font-family: Montserrat; max-width: 1100px; margin: auto;}
+    /* max-width: 1100px; margin: auto; */
+      body {padding: 20px; font-family: Montserrat; }
 
     </style>
 
   </head>
   <body onload='init()' onresize='init()'>
-    <h1>History of Auto Sales, Manufacturing, and Gas Prices</h1>
-    <h5>Analyzing the impact of gas prices on truck vs. car sales, production, and climate footprint</h5>
-    <hr/>
-    <div class="row">
-      <div class="col-3">
-        <h2><span class="sceneStartYear"></span> to <span class="sceneEndYear"></span></h2>
-        <h5 id="subheading">Vehicle <b>Sales</b> and Gas Prices</h5>
-        <nav aria-label="...">
-          <ul class="pagination">
-            <li id="s1" class="page-item"><a class="page-link" href="vehiclesalesvis.html?scene=1">1</a></li>
-            <li id="s2" class="page-item"><a class="page-link" href="vehiclesalesvis.html?scene=2">2</a</li>
-            <li id="s3" class="page-item"><a class="page-link" href="vehiclesalesvis.html?scene=3">3</a></li>
-            <li id="s4" class="page-item"><a class="page-link" href="vehiclesalesvis.html?scene=4">4</a></li>
-            <li id="s5" class="page-item"><a class="page-link" href="vehiclesalesvis.html?scene=5">5</a></li>
-            <li id="s6" class="page-item"><a class="page-link" href="vehiclesalesvis.html?scene=6">6</a></li>
-            <li id="s7" class="page-item"><a class="page-link" href="vehiclesalesvis.html?scene=7">7</a></li>
-          </ul>
-        </nav>
-        <button id="prevBtn" type="button" class="btn btn-primary"><< Prev</button>
-        <button id="nextBtn" type="button" class="btn btn-primary">Next >></button>
-        <hr/>
+    <div class="container">
+      <h1>History of Auto Sales, Manufacturing, and Gas Prices</h1>
+      <h5>Analyzing the impact of gas prices on truck vs. car sales, production, and climate footprint</h5>
+      <hr/>
+      <div class="row">
+        <div class="col-3">
+          <h2><span class="sceneStartYear"></span> to <span class="sceneEndYear"></span></h2>
+          <h5 id="subheading">Vehicle <b>Sales</b> and Gas Prices</h5>
+          <nav aria-label="...">
+            <ul class="pagination">
+              <li id="s1" class="page-item"><a class="page-link" href="vehiclesalesvis.html?scene=1">1</a></li>
+              <li id="s2" class="page-item"><a class="page-link" href="vehiclesalesvis.html?scene=2">2</a</li>
+              <li id="s3" class="page-item"><a class="page-link" href="vehiclesalesvis.html?scene=3">3</a></li>
+              <li id="s4" class="page-item"><a class="page-link" href="vehiclesalesvis.html?scene=4">4</a></li>
+              <li id="s5" class="page-item"><a class="page-link" href="vehiclesalesvis.html?scene=5">5</a></li>
+              <li id="s6" class="page-item"><a class="page-link" href="vehiclesalesvis.html?scene=6">6</a></li>
+              <li id="s7" class="page-item"><a class="page-link" href="vehiclesalesvis.html?scene=7">7</a></li>
+            </ul>
+          </nav>
+          <button id="prevBtn" type="button" class="btn btn-primary"><< Prev</button>
+          <button id="nextBtn" type="button" class="btn btn-primary">Next >></button>
+          <hr/>
+          <div id="sceneNotes"></div>
+        </div>
+        <div class="col-9">
+          <h5 class="text-primary">Explore here! </h5>
+          <p><b>Filter by range of years: </b>Choose start year and end year between 1976 and 2018 and hover over points!</p>
+          <div style="float:left">
+            Start year: <input id="startyearinput" type="number" name="startYear" min="1976" max="2018"> |
+            End year: <input id="endyearinput" type="number" name="endYear" min="1976" max="2018">
+            <input id="yearFilterSubmit" type="submit"> &nbsp | &nbsp
+          </div>
+          <div id="resetSlider" style="float:left">
+            <input label="RESET SLIDE" type="submit" value="Reset Slide">&nbsp&nbsp
+          </div>
+          <form href="vehiclesalesvis.html?scene=1">
+            <input label="Go Home" type="submit" value="Go Home">
+          </form>
+          <svg class="chart1" height=350 width=1000></svg>
+          <svg class="chart2" height=350 width=1000></svg>
+          <svg class="chart3" height=350 width=950></svg>
+        </div>
       </div>
-      <div id="sceneNotes" class="col-9"></div>
     </div>
     <hr/>
-    <h5 class="text-primary">Explore here! </h5>
-    <p><b>Filter by range of years: </b>Choose start year and end year between 1976 and 2018 and hover over points!</p>
-    <div style="float:left">
-      Start year: <input id="startyearinput" type="number" name="startYear" min="1976" max="2018"> |
-      End year: <input id="endyearinput" type="number" name="endYear" min="1976" max="2018">
-      <input id="yearFilterSubmit" type="submit"> &nbsp | &nbsp
-    </div>
-    <div id="resetSlider" style="float:left">
-      <input label="RESET SLIDE" type="submit" value="Reset Slide">&nbsp&nbsp
-    </div>
-    <form href="vehiclesalesvis.html?scene=1">
-      <input label="Go Home" type="submit" value="Go Home">
-    </form>
-    <svg class="chart1" height=350 width=1000></svg>
-    <svg class="chart2" height=350 width=1000></svg>
-    <svg class="chart3" height=350 width=950></svg>
 
 
     <script type="text/javascript" src="d3-scripts.js"></script>
