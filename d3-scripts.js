@@ -183,8 +183,8 @@ var load_gaspriceyoy = async function(elemname, elemheight, elemwidth, startYear
         // .attr("transform","translate("+margin.left+","+margin.top+")");
 
       var boundingClientRect = textG.node().getBoundingClientRect();
-      var xabs = boundingClientRect.x;
-      var yabs = boundingClientRect.y;
+      var xabs = boundingClientRect.left;
+      var yabs = boundingClientRect.top;
 
       var annotationHeight = 90;
       var annotationWidth = 60;
@@ -439,8 +439,8 @@ var load_truckcarsales = async function(elemname, elemheight, elemwidth, startYe
         // Plot scatter points
         var textG = d3.select(elemname);
         var boundingClientRect = textG.node().getBoundingClientRect();
-        var xabs = boundingClientRect.x;
-        var yabs = boundingClientRect.y;
+        var xabs = boundingClientRect.left;
+        var yabs = boundingClientRect.top;
 
         var annotationHeight = 90;
         var annotationWidth = 60;
@@ -693,8 +693,8 @@ var load_truckcarprod = async function(elemname, elemheight, elemwidth, startYea
         // Plot scatter points
         var textG = d3.select(elemname);
         var boundingClientRect = textG.node().getBoundingClientRect();
-        var xabs = boundingClientRect.x;
-        var yabs = boundingClientRect.y;
+        var xabs = boundingClientRect.left;
+        var yabs = boundingClientRect.top;
 
         var annotationHeight = 90;
         var annotationWidth = 60;
@@ -878,8 +878,8 @@ var load_mpg = async function(elemname, elemheight, elemwidth, startYear, endYea
     // Plot scatter points
     var textG = d3.select(elemname);
     var boundingClientRect = textG.node().getBoundingClientRect();
-    var xabs = boundingClientRect.x;
-    var yabs = boundingClientRect.y;
+    var xabs = boundingClientRect.left;
+    var yabs = boundingClientRect.top;
 
     var annotationHeight = 90;
     var annotationWidth = 60;
@@ -1063,8 +1063,8 @@ var load_co2 = async function(elemname, elemheight, elemwidth, startYear, endYea
     // Plot scatter points
     var textG = d3.select(elemname);
     var boundingClientRect = textG.node().getBoundingClientRect();
-    var xabs = boundingClientRect.x;
-    var yabs = boundingClientRect.y;
+    var xabs = boundingClientRect.left;
+    var yabs = boundingClientRect.top;
 
     var annotationHeight = 90;
     var annotationWidth = 60;

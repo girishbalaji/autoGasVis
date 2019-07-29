@@ -38,7 +38,7 @@
           <div id="sceneNotes"></div>
         </div>
         <div class="col-9">
-          <h5 class="text-primary">Explore here! </h5>
+          <!-- <h5 class="text-primary">Explore here! </h5> -->
           <p><b>Filter by range of years: </b>Choose start year and end year between 1976 and 2018 and hover over points!</p>
           <div style="float:left">
             Start year: <input id="startyearinput" type="number" name="startYear" min="1976" max="2018"> |
@@ -51,9 +51,9 @@
           <form href="vehiclesalesvis.html?scene=1">
             <input label="Go Home" type="submit" value="Go Home">
           </form>
-          <svg class="chart1" height=350 width=1000></svg>
-          <svg class="chart2" height=350 width=1000></svg>
-          <svg class="chart3" height=350 width=950></svg>
+          <svg class="chart1" height=300 width=900></svg>
+          <svg class="chart2" height=300 width=900></svg>
+          <svg class="chart3" height=300 width=900></svg>
         </div>
       </div>
     </div>
@@ -91,8 +91,8 @@
 
       if (scene == 1) {
         const sceneNote = '<h4>Slide 1: The Overview</h4>'+
-          '<ul><li>Here, we present an overview of the history of oil prices and car sales. Go to the next slides for a history tour with more details!</li>' +
-          '<li>Slides 1-5 take you on a tour of <b>retail car sales data, not all cars manufactured</b> for the US market</li>' +
+          '<ul><li>Click \'Next\' to begin your tour of US oil and auto sales!</li>' +
+          // '<li>Slides 1-5 take you on a tour of <b>retail car sales data, not all cars manufactured</b> for the US market</li>' +
           // '<li>To jump to oil prices effect on automakers <b>all cars manufactured</b> YoY, click <a href="/vehicleprodvis.html">here for slide 6</a> </li>' +
           // '<li>To jump to oil prices effect on automakers climate impact: <b>emissions/ MPG of all cars produced</b>, click <a href="/vehicleclimatevis.html">here for slide 7</a> </li>' +
           '<li>Big picture trend: <u>as gas prices decrease, truck sales increase</u></li>';
@@ -182,16 +182,16 @@
       d3.selectAll("div.annotations").remove();
 
       if (scene >= 1 && scene <= 5) {
-        load_gaspriceyoy("svg.chart1", 350, 1000, startYear, endYear);
-        load_truckcarsales("svg.chart2", 350, 1000, startYear, endYear);
+        load_gaspriceyoy("svg.chart1", 300, 900, startYear, endYear);
+        load_truckcarsales("svg.chart2", 300, 900, startYear, endYear);
       } else if (scene == 6) {
 
-        load_gaspriceyoy("svg.chart1", 350, 1000, startYear, endYear);
-        load_truckcarprod("svg.chart2", 350, 1000, startYear, endYear);
+        load_gaspriceyoy("svg.chart1", 300, 900, startYear, endYear);
+        load_truckcarprod("svg.chart2", 300, 900, startYear, endYear);
       } else if (scene == 7) {
-        load_gaspriceyoy("svg.chart1", 350, 1000, startYear, endYear);
-        load_mpg("svg.chart2", 350, 1000, startYear, endYear);
-        load_co2("svg.chart3", 350, 1000, startYear, endYear);
+        load_gaspriceyoy("svg.chart1", 300, 900, startYear, endYear);
+        load_mpg("svg.chart2", 300, 900, startYear, endYear);
+        load_co2("svg.chart3", 300, 900, startYear, endYear);
       }
     }
 
