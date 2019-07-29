@@ -17,8 +17,7 @@
     <div class="row">
       <div class="col-5">
         <h4>Scene <span class="sceneNum"></span></h4>
-        <h5>Auto <b>Sales</b> and Gas Pricing YoY
-          from <span class="sceneStartYear"></span> to <span class="sceneEndYear"></span>
+        <h5>Auto <b>Sales</b> and Gas Prices <span class="sceneStartYear"></span> to <span class="sceneEndYear"></span>
         </h5>
         <nav aria-label="...">
           <ul class="pagination">
@@ -43,10 +42,15 @@
       <input type="submit"> &nbsp | &nbsp
     </form>
     <form action="#">
-      <input label="Reset" type="submit" value="RESET"> <i>(returns to overview scene 1)</i>
+      <input label="Reset" type="submit" value="RESET">
     </form>
     <svg class="gaspriceyoy" height=400 width=950></svg>
     <svg class="truckcarsales" height=400 width=950></svg>
+    <svg class="truckcarprod" height=400 width=950></svg>
+    <svg class="mpgyoy" height=400 width=950></svg>
+    <svg class="co2yoy" height=400 width=950></svg>
+
+
     <script type="text/javascript" src="d3-scripts.js"></script>
     <script>
 
@@ -60,32 +64,59 @@
         scene = parseInt(urlParams.get("scene"));
       }
       if (scene == 1) {
-        const sceneNote = "<h5>Key Insights from the data:</h5>"+
-      '<h6>Scene 1, the Overview</h6>'+
-          '<ul><li>Here, we present an overview of the history of oil prices, and car sales</li>' +
-          '<li>Future scenes will focus and remark on specific period in vehicle sales and oil history</li>'  +
-          '<li>1981: lol</li>' +
-          '<li>1978: hello</li>' +
-          '<li>1981: lol</li>' +
-          '<li>1978: hello</li>' +
-          '<li>1981: lol</li></ul>';
-        d3.select("#s1").classed("active", true);
-        d3.select("#sceneNotes").html(sceneNote);
+        const sceneNote = "<h5>Key Notes on the Data:</h5>"+
+          '<h6>Scene 1, the Overview</h6>'+
+          '<ul><li>Here, we present an overview of the history of oil prices and car sales. Go to the next slides for a history tour with more details!</li>' +
+          '<li>Slides 1-5 take you on a tour of <b>retail car sales data, not all cars manufactured</b> for the US market</li>' +
+          '<li>To jump to oil prices effect on automakers <b>all cars manufactured</b> YoY, click <a href="/vehicleprodvis.html">here for slide 6</a> </li>' +
+          '<li>To jump to oil prices effect on automakers climate impact: <b>emissions/ MPG of all cars produced</b>, click <a href="/vehicleclimatevis.html">here for slide 7</a> </li>' +
+          '<li>Big picture trend: <u>as gas prices decrease, truck sales increase</u></li>';
+          d3.select("#sceneNotes").html(sceneNote);
+          d3.select("#s1").classed("active", true);
       } else if (scene == 2) {
         startYear = 1976;
         endYear = 1981;
+        const sceneNote = "<h5>Key Notes on the Data:</h5>"+
+          '<h6>Scene 2, All Sales Plummet after Iranian Oil Crisis</h6>'+
+          '<ul><li>Throughout the mid 1970s to 1978, oil prices fell steadily as the US recovered from the 1973 Oil Crisis</li>' +
+          '<li>As a result of falling prices, all vehicle sales increased (cars maintain ~75% market share; trucks 25%)</li>'+
+          '<li>However in 1978, political turmoil in Iran, which controlled 7% of global market, shattered their oil production</li>' +
+          '<li>Oil prices skyrocket by 25%; and all vehicles sales decreased. Then, cars dominated trucks with >80% of sales</li>';
+        d3.select("#sceneNotes").html(sceneNote);
         d3.select("#s2").classed("active", true);
       } else if (scene == 3) {
         startYear = 1981;
         endYear = 2002;
+        const sceneNote = "<h5>Key Notes on the Data:</h5>"+
+          '<h6>Scene 3, Plenty of Oil: 2 Decades of Price Drops!</h6>'+
+          '<ul><li>After the 1978 oil shock, US secures global sources of oil through OPEC and allies</li>' +
+          '<li>As gas becomes cheaper, truck sales skyrocket 300% over these two decades! However, car sales flatline</li>'+
+          '<li>By 2000, cars and trucks have roughly equal sales, despite cars dominating in 1980</li>' +
+          '<li>As the economy remains generally healthy, overall vehicle sales increase 60 percent over this period</li>';
+        d3.select("#sceneNotes").html(sceneNote);
         d3.select("#s3").classed("active", true);
       } else if (scene == 4) {
         startYear = 2002;
         endYear = 2008;
+        const sceneNote = "<h5>Key Notes on the Data:</h5>"+
+          '<h6>Scene 4, Oil Tensions but the Economy Blooms </h6>'+
+          '<ul><li>After the 2000 dot com bust, US begins a steady recovery for 6 years</li>'+
+          '<li>Consequently, after 9/11 and the Afghanistan War, US tensions grew with oil producing countries</li>'+
+          '<li>Oil price skyrocket by 100%!</li>' +
+          '<li>While auto and esp. truck sales are expected to decrease during rising oil prices, car and auto sales basically flatline maintaining around 50/50 market split</li>';
+        d3.select("#sceneNotes").html(sceneNote);
         d3.select("#s4").classed("active", true);
       } else if (scene == 5) {
         startYear = 2008;
         endYear = 2018;
+        const sceneNote = "<h5>Key Notes on the Data:</h5>"+
+          '<h6>Scene 4, The Modern Era: Great Recession and Shale Boom!</h6>'+
+          '<ul><li>Afer the 6 years of economic growth, 2008 was the great recession.</li>'+
+          '<li>All vehicles sales plummeted by 21 percent.</li>'+
+          '<li>The oil prices followed the economy too. During the recovery, cars and trucks shared 50/50 market split until 2014. </li>' +
+          '<li>In 2014, US oil production skyrocketed as shale oil was discovered.</li>' +
+          '<li>Trucks sales boomed 36% since then. Car sales were shot by 30%.</li>';
+        d3.select("#sceneNotes").html(sceneNote);
         d3.select("#s5").classed("active", true);
       }
       d3.select("span.sceneNum").html(scene);
@@ -102,16 +133,39 @@
           endYear = endYearQuery;
         }
       }
+
       d3.select("#startyearinput").attr("value", startYear);
       d3.select("#endyearinput").attr("value", endYear);
-      // clear SVGs
-      d3.select("svg.gaspriceyoy").html("");
-      d3.select("svg.truckcarsales").html("");
-      d3.selectAll("div.annotations").remove();
 
 
-      load_gaspriceyoy("svg.gaspriceyoy", 400, 950, startYear, endYear);
-      load_truckcarsales("svg.truckcarsales", 400, 950, startYear, endYear);
+      if (scene >= 1 && scene <= 5) {
+        // clear SVGs
+        d3.select("svg.gaspriceyoy").html("");
+        d3.select("svg.truckcarsales").html("");
+        d3.selectAll("div.annotations").remove();
+
+        load_gaspriceyoy("svg.gaspriceyoy", 400, 950, startYear, endYear);
+        load_truckcarsales("svg.truckcarsales", 400, 950, startYear, endYear);
+      } else if (scene == 6) {
+        // clear SVGs
+        d3.select("svg.gaspriceyoy").html("");
+        d3.select("svg.truckcarprod").html("");
+        d3.selectAll("div.annotations").remove();
+
+        load_gaspriceyoy("svg.gaspriceyoy", 400, 950, startYear, endYear);
+        load_truckcarprod("svg.truckcarprod", 400, 950, startYear, endYear);
+      } else if (scene == 7) {
+        // clear SVGs
+        alert("ah");
+        d3.select("svg.gaspriceyoy").html("");
+        d3.select("svg.mpgyoy").html("");
+        d3.select("svg.co2yoy").html("");
+        d3.selectAll("div.annotations").remove();
+
+        load_gaspriceyoy("svg.gaspriceyoy", 400, 950, startYear, endYear);
+        load_mpg("svg.mpgyoy", 300, 950, startYear, endYear);
+        load_co2("svg.co2yoy", 300, 950, startYear, endYear);
+      }
     }
 
     // sources:
