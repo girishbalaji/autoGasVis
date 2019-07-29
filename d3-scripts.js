@@ -167,12 +167,12 @@ var load_gaspriceyoy = async function(elemname, elemheight, elemwidth, startYear
       // Edit this to add more annoations
       notes_dict = {
                   "1979":"(1979) Iranian oil crisis shatter oil supply",
-                  "1986":"(1986) OPEC adds to oil supply",
+                  "1985":"(1986) OPEC adds to global oil supply",
                   "1990":"(1990) Gulf War decreases US supply",
                   "1994":"(1994) NAFTA allows more oil from Mexico",
                   "2002":"(2002) Recession; 9/11 and Afghan War",
-                  "2008":"(2008) Financial crisis/ great recession",
-                  "2014":"(2014) US Shale oil discovered huge supply incraease"
+                  "2007":"(2008) Financial crisis/ great recession",
+                  "2014":"(2014) Shale oil boom in US"
                 };
       var gaswithnotes = gasdata.filter(d => d.Year in notes_dict);
       var gaswithnotes = gaswithnotes.map(function(d) {d["note"] = notes_dict[d.Year]; return d;} )
@@ -430,7 +430,6 @@ var load_truckcarsales = async function(elemname, elemheight, elemwidth, startYe
                     "1994":"(1994) Truck sales accelerate; car sales decreasing",
                     "2000":"(2000) Truck sales you overtake car sales",
                     "2007":"(2007) All vehicle sales begin plummet",
-                    "2009":"(2009) All vehicle sales begin recovery",
                     "2013":"(2014) Trucks skyrocket; Cars plummet"
                   };
         var gaswithnotes = truckcarsalesdata.filter(d => getYear(d) in notes_dict);
@@ -679,13 +678,12 @@ var load_truckcarprod = async function(elemname, elemheight, elemwidth, startYea
         // add annotations
         // Edit this to add more annoations
         notes_dict = {
-                    "1979":"(1979) All vehicle sales decreasing",
-                    "1986":"(1986) Truck sales increasing; car sales decreasing",
-                    "1994":"(1994) Truck sales accelerate; car sales decreasing",
-                    "2000":"(2000) Truck sales you overtake car sales",
-                    "2007":"(2007) All vehicle sales begin plummet",
-                    "2009":"(2009) All vehicle sales begin recovery",
-                    "2013":"(2014) Trucks skyrocket; Cars plummet"
+                    "1979":"(1979) All vehicle production decreasing due to crisis",
+                    "1986":"(1986) Truck production steadily increasing to catch demand",
+                    "1994":"(1994) Car production stagnating because of low demand",
+                    // "2000":"(2000) Truck sales overtake car sales",
+                    "2007":"(2007) All vehicle production plummet",
+                    "2013":"(2014) Truck productions skyrocket; Cars stagnate"
                   };
         var gaswithnotes = truckcarsalesdata.filter(d => getYear(d) in notes_dict);
         var gaswithnotes = gaswithnotes.map(function(d) {d["note"] = notes_dict[getYear(d)]; return d;} )
@@ -869,7 +867,6 @@ var load_mpg = async function(elemname, elemheight, elemwidth, startYear, endYea
                 "1994":"(1994) Truck sales accelerate; car sales decreasing",
                 "2000":"(2000) Truck sales you overtake car sales",
                 "2007":"(2007) All vehicle sales begin plummet",
-                "2009":"(2009) All vehicle sales begin recovery",
                 "2013":"(2014) Trucks skyrocket; Cars plummet"
               };
     var gaswithnotes = truckcarsalesdata.filter(d => getYear(d) in notes_dict);

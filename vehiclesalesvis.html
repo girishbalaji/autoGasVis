@@ -15,7 +15,7 @@
   <body onload='init()' onresize='init()'>
     <div class="container">
       <h1>History of Auto Sales, Manufacturing, and Gas Prices</h1>
-      <h5>Analyzing the impact of gas prices on truck vs. car sales, production, and climate footprint</h5>
+      <h5>The Great Rise of Trucks Since 1978 | <i>Cheap Gas + Market Boom = More Trucks</i></h5>
       <hr/>
       <div class="row">
         <div class="col-3">
@@ -53,7 +53,7 @@
           </form>
           <svg class="chart1" height=300 width=900></svg>
           <svg class="chart2" height=300 width=900></svg>
-          <svg class="chart3" height=300 width=900></svg>
+          <svg class="chart3" height=0 width=900></svg>
         </div>
       </div>
     </div>
@@ -191,6 +191,7 @@
       } else if (scene == 7) {
         load_gaspriceyoy("svg.chart1", 300, 900, startYear, endYear);
         load_mpg("svg.chart2", 300, 900, startYear, endYear);
+        d3.select("svg.chart3").style("height","300");
         load_co2("svg.chart3", 300, 900, startYear, endYear);
       }
     }
