@@ -862,12 +862,10 @@ var load_mpg = async function(elemname, elemheight, elemwidth, startYear, endYea
     // add annotations
     // Edit this to add more annoations
     notes_dict = {
-                "1979":"(1979) All vehicle sales decreasing",
-                "1986":"(1986) Truck sales increasing; car sales decreasing",
-                "1994":"(1994) Truck sales accelerate; car sales decreasing",
-                "2000":"(2000) Truck sales you overtake car sales",
-                "2007":"(2007) All vehicle sales begin plummet",
-                "2013":"(2014) Trucks skyrocket; Cars plummet"
+                "1979":"(1979) Oil crisis; innovation drives fuel economy up!",
+                "1986":"(1986) Fuel economy plateaus for 20 years!",
+                "1994":"(1995) Auto makers still don't care about MPG",
+                "2013":"(2005) MPG steadily increases due to public policy"
               };
     var gaswithnotes = truckcarsalesdata.filter(d => getYear(d) in notes_dict);
     var gaswithnotes = gaswithnotes.map(function(d) {d["note"] = notes_dict[getYear(d)]; return d;} )
@@ -1046,13 +1044,10 @@ var load_co2 = async function(elemname, elemheight, elemwidth, startYear, endYea
     // add annotations
     // Edit this to add more annoations
     notes_dict = {
-                "1979":"(1979) All vehicle sales decreasing",
-                "1986":"(1986) Truck sales increasing; car sales decreasing",
-                "1994":"(1994) Truck sales accelerate; car sales decreasing",
-                "2000":"(2000) Truck sales you overtake car sales",
-                "2007":"(2007) All vehicle sales begin plummet",
-                "2009":"(2009) All vehicle sales begin recovery",
-                "2013":"(2014) Trucks skyrocket; Cars plummet"
+                "1979":"(1979) Oil crisis; innovation drives emissions down",
+                "1986":"(1986) Emissions per car plateau for 20 years!",
+                "1994":"(1995) Auto makers still don't care about emissions",
+                "2013":"(2005) CO2 out steadily decrease due to public policy"
               };
     var gaswithnotes = truckcarsalesdata.filter(d => getYear(d) in notes_dict);
     var gaswithnotes = gaswithnotes.map(function(d) {d["note"] = notes_dict[getYear(d)]; return d;} )
