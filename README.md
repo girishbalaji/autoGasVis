@@ -1,6 +1,10 @@
 # A Narrative Visualization
 ## The Effect of Oil Price Fluctuations on Truck vs. Car Sales, Manufacturing Numbers, and Efficiency
 
+- https://www.girishbalaji.com/autoGasVis/vehicleclimatevis.html
+- https://www.girishbalaji.com/autoGasVis/vehicleprodvis.html
+- https://www.girishbalaji.com/autoGasVis/vehiclesalesvis.html
+
 ### Data Sources
 - (Light weight Truck, Car, Total Sales) U.S. Bureau of Economic Analysis, Light Weight Vehicle Sales [LTOTALNSA], retrieved from FRED, Federal Reserve Bank of St. Louis; https://fred.stlouisfed.org/series/LTOTALNSA, August 10, 2019.
 - (All automobile production breakdown) https://www.epa.gov/automotive-trends/download-data-automotive-trends-report
